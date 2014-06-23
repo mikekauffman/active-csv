@@ -36,6 +36,13 @@ describe ActiveCSV::Base do
       expect(active_csv.respond_to?(:age)).to eq(true)
       expect(active_csv.respond_to?(:foofoo)).to eq(false)
     end
+
+    it "normalizes the headers into standard ruby format" do
+      row = CSV::Row.new(["FIrst   NAme  "], ["Joe"])
+      active_csv = ActiveCSV::Base.new(row)
+
+      expect(active_csv.first_name).to eq("Joe")
+    end
   end
 
   pending ".file_path" do
