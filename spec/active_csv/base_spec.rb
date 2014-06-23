@@ -18,9 +18,18 @@ describe ActiveCSV::Base do
       expect(active_csv.name).to eq("joe")
       expect(active_csv.age).to eq("24")
     end
+
+    it "respond_to_missing returns true or false accurately" do
+      row = CSV::Row.new(["name", "age"], ["joe", "24"])
+
+      active_csv = ActiveCSV::Base.new(row)
+
+      expect(active_csv.respond_to?(:name)).to eq(true)
+      expect(active_csv.respond_to?(:foofoo)).to eq(false)
+    end
   end
 
-  describe ".file_path" do
+  pending ".file_path" do
     it "allows you to set the file path to the CSV" do
       klass = Class.new(ActiveCSV::Base) do
         self.file_path = "foo"
