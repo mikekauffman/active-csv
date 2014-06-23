@@ -27,6 +27,15 @@ describe ActiveCSV::Base do
       expect(active_csv.respond_to?(:name)).to eq(true)
       expect(active_csv.respond_to?(:foofoo)).to eq(false)
     end
+
+    it "returns nil if a field is nil" do
+      row = CSV::Row.new(["name", "age"], ["joe"])
+      active_csv = ActiveCSV::Base.new(row)
+
+      expect(active_csv.age).to eq(nil)
+      expect(active_csv.respond_to?(:age)).to eq(true)
+      expect(active_csv.respond_to?(:foofoo)).to eq(false)
+    end
   end
 
   pending ".file_path" do
