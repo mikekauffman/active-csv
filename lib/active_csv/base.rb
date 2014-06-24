@@ -18,6 +18,18 @@ module ActiveCSV
       @row.has_key?(method_name.to_s) || super
     end
 
+    def self.file_path=(path)
+      @file_path = path
+    end
+
+    def self.file_path
+      @file_path
+    end
+
+    def self.all
+      CSV.read(@file_path, headers: true)
+    end
+
     private
 
     def cleaned_headers(row)
@@ -27,6 +39,5 @@ module ActiveCSV
         CSV::Row.new(headers, values)
       end
     end
-
   end
 end

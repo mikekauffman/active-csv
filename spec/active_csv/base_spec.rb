@@ -45,13 +45,18 @@ describe ActiveCSV::Base do
     end
   end
 
-  pending ".file_path" do
+  describe ".file_path" do
     it "allows you to set the file path to the CSV" do
       klass = Class.new(ActiveCSV::Base) do
         self.file_path = "foo"
       end
       expect(klass.file_path).to eq("foo")
     end
+    it ".all returns an array of the Active CSV objects" do
+      klass = Class.new(ActiveCSV::Base) do
+        self.file_path = "/Users/MikeMac/gSchoolWork/active-csv/spec/fixtures/sample.csv"
+      end
+      expect(klass.all).to match_array([["id", "first_name"], ["4", "Joe"]])
+    end
   end
-
 end
